@@ -16,19 +16,41 @@ class _ChartaScreenState extends ConsumerState<ChartaScreen> {
 
   CircleAnnotationManager? _circleAnnotationManager;
 
+  Cancelable? _dragCancelable;
+
 void _initiareCircleAnnotations(MapboxMap mapboxMap) {
 
   mapboxMap.annotations.createCircleAnnotationManager().then((manager) {
     _circleAnnotationManager = manager;
 
+    _setupDragListener( manager );
+
     _addeVelRenovareMarker();
   });
 }
+
+  void _setupDragListener(CircleAnnotationManager manager) {
+    
+    _dragCancelable?.cancel();
+
+    _dragCancelable = manager.dragEvents(
+      onChanged: (CircleAnnotation annotation) {
+        final pos = annotation.geometry.coordinates;
+        ref.read(coordsMarkerProvider.notifier).state = pos;
+      },
+      onEnd: (CircleAnnotation annotation) {
+        final pos = annotation.geometry.coordinates;
+        ref.read(coordsMarkerProvider.notifier).state = pos;
+      }
+    );
+  }
 
 Future<void> _addeVelRenovareMarker() async {
 
   final manager = _circleAnnotationManager;
   if (manager == null) return;
+
+  await manager.deleteAll();
 
   final placed = ref.read(markerPositumProvider);
   if ( !placed) {
@@ -36,7 +58,7 @@ Future<void> _addeVelRenovareMarker() async {
     return;
   }
 
-  final situs = Position(-122.467895, 37.800126);
+  final situs = ref.read(coordsMarkerProvider);
   final color = ref.read(formColorProvider);
 
   final optiones = CircleAnnotationOptions(
@@ -55,6 +77,13 @@ Future<void> _addeVelRenovareMarker() async {
   }
 
 }
+
+  @override
+  void dispose() {
+    
+    _dragCancelable?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +105,7 @@ Future<void> _addeVelRenovareMarker() async {
             key: ValueKey('main_mapa'),
             cameraOptions: CameraOptions(
               center: Point(
-                coordinates: Position( -122.467895, 37.800126)
+                coordinates: initialisMarkerPoistio
               ),
               zoom: 14.5,
             ),
@@ -88,7 +117,13 @@ Future<void> _addeVelRenovareMarker() async {
           alignment: Alignment.topRight,
           child: Padding(
             padding: EdgeInsets.all(12),
-            child: ComplereForm()
+            child: ref.watch(markerPositumProvider) 
+            ? InformaUsoris(
+              nomen: ref.watch(formNomenProvider), 
+              color: ref.watch(formColorProvider), 
+              positio: ref.watch(coordsMarkerProvider), 
+              )
+            : ComplereForm()
           ),
         )
         ],
