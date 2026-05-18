@@ -3,3 +3,5 @@ import 'package:flutter_riverpod/legacy.dart';
 
 final formNomenProvider = StateProvider((ref) => '');
 final formColorProvider = StateProvider<Color>((ref) => Colors.red);
+
+final markerPositumProvider = StateProvider<bool>((ref) => false);

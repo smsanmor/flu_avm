@@ -199,9 +199,15 @@ Future<void> _aperireColorPicker(BuildContext context, WidgetRef ref) async {
     },
   );
 
-  // Si se ha seleccionado un color, se establece como estado del provider
-  if (electusColor != null) {
-    ref.read(formColorProvider.notifier).state = electusColor;
+  void _onFormSubmit(WidgetRef ref) {
+    
+    final String nameValue = ref.read(formNomenProvider);
+    final Color color = ref.read(formColorProvider);
+    final String colorValue = exColorAdHex(color);
+
+    if ( nameValue.isEmpty ) return;
+
+    ref.read(markerPositumProvider.notifier).state = true; 
   }
 }
 
