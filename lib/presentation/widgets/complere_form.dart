@@ -119,7 +119,7 @@ class ComplereForm extends ConsumerWidget {
     
     final String nameValue = ref.read(formNomenProvider);
     final Color color = ref.read(formColorProvider);
-    final String colorValue = exColorAdHex(color); //ERROR
+    final String colorValue = exColorAdHex(color); 
 
     if ( nameValue.isEmpty ) return;
     
