@@ -1,3 +1,4 @@
+import 'package:flu_avm/config/config.dart';
 import 'package:flu_avm/services/charta_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,4 +21,10 @@ final socketServiceProvider = Provider<ChartaService>((ref) {
   ref.onDispose(service.finire);
   
   return service;
+});
+
+
+final aliiUsoresProvider = StreamProvider<List<Usor>>((ref) {
+  final service = ref.watch(socketServiceProvider);
+  return service.usoresStream;
 });
