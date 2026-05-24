@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flu_avm/mappers/pokemon_mapper.dart';
 
 class PokemonService {
 
@@ -9,8 +10,14 @@ class PokemonService {
     try {
 
       final responsio = await dio.get(' https://pokeapi.co/api/v2/pokemon/$pokemonId');
+
+      final pokemon = PokemonMapper.pokeApiPokemonToEntitie(responsio.data);
+
+      return(pokemon, 'Data obtenida correctamente');
       
     } catch (e) {
+
+      return (null, 'No se pudo obtener el Pokemon');
       
     }
 
