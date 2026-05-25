@@ -32,7 +32,3 @@ class MainApp extends ConsumerWidget {
     );
   }
 }
-
-
-
-//
