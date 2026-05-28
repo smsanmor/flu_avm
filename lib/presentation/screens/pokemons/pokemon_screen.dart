@@ -49,7 +49,7 @@ class _PokemonVisum extends StatelessWidget {
               Text(pokemon.facultates.join(', '), style: GoogleFonts.russoOne(fontSize: 22),),
               Image.network (
                 pokemon.faciemImaginen ?? '',
-                fit: BoxFit. contain,
+                fit: BoxFit.contain,
                 width: 300,
                 height: 300,
             ),

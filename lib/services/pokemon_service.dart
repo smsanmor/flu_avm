@@ -9,7 +9,7 @@ class PokemonService {
 
     try {
 
-      final responsio = await dio.get(' https://pokeapi.co/api/v2/pokemon/$pokemonId');
+      final responsio = await dio.get('https://pokeapi.co/api/v2/pokemon/$pokemonId');
 
       final pokemon = PokemonMapper.pokeApiPokemonToEntitie(responsio.data);
 
