@@ -19,7 +19,7 @@ class BeneventusScreens extends ConsumerWidget {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.data_object_rounded, size: 20),
+                  const Icon(Icons.data_object_rounded, size: 26),
                   const SizedBox(width: 8),
                   const Text(
                     'Flu Avm',
@@ -44,9 +44,64 @@ class BeneventusScreens extends ConsumerWidget {
                   ),
                 ],
               ),
+              const SizedBox(height: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 4,
+
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: const Text(
+                        'WS',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1.2,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      _WsImage(path: 'assets/images/movil.png'),
+                      _WsImage(path: 'assets/images/puntos.png'),
+                      _WsImage(path: 'assets/images/servidor.png'),
+                    ],
+                  ),
+                ],
+              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+class _WsImage extends StatelessWidget {
+  final String path;
+  const _WsImage({required this.path});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 90,
+      height: 70,
+      child: Image.asset(
+        path,
+        fit: BoxFit.contain,
       ),
     );
   }
