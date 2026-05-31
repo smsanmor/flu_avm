@@ -39,5 +39,17 @@ const appMenuItems = <MenuItem>[
     subtitulus: 'Peticiones http a una API',
     link: '/request',
     icon: Icons.catching_pokemon
+  ),
+  MenuItem(
+    titulus: 'The Rick and Morty Api',
+    subtitulus: 'Practica peticiones http a otra API',
+    link: '/petitio',
+    icon: Icons.rocket_launch
+  ),
+  MenuItem(
+    titulus: 'Calendar',
+    subtitulus: 'Diseño en Dart',
+    link: '/calendar',
+    icon: Icons.calendar_month_outlined
   )
 ];
