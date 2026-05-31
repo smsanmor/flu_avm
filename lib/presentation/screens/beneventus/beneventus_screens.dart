@@ -17,6 +17,7 @@ class BeneventusScreens extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // ROW SUBSTITUTO APP BAR
               Row(
                 children: [
                   const Icon(Icons.data_object_rounded, size: 26),
@@ -44,7 +45,12 @@ class BeneventusScreens extends ConsumerWidget {
                   ),
                 ],
               ),
+
+              // SEPARACIÓN
               const SizedBox(height: 20),
+              // SEPARACIÓN
+
+              // WS
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -83,6 +89,71 @@ class BeneventusScreens extends ConsumerWidget {
                   ),
                 ],
               ),
+
+              // SEPARACIÓN
+              const Spacer(flex: 2),
+              // SEPARACIÓN
+
+              
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Punto rojo.
+                        Container(
+                          width: 8,
+                          height: 8,
+                          decoration: const BoxDecoration(
+                            color: Colors.red,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        const Text(
+                          'CONECTADO',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.1,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  // Título
+                  const Text(
+                    'WebSockets en vivo',
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  // Descripción.
+                  Text(
+                    'Aprende a construir apps con datos en tiempo real en Flutter. Dos ejemplos prácticos te esperan dentro.',
+                    style: TextStyle(
+                      fontSize: 14,
+                      height: 1.35,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
@@ -90,6 +161,7 @@ class BeneventusScreens extends ConsumerWidget {
     );
   }
 }
+
 class _WsImage extends StatelessWidget {
   final String path;
   const _WsImage({required this.path});
