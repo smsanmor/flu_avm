@@ -1,6 +1,7 @@
 import 'package:flu_avm/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class BeneventusScreens extends ConsumerWidget {
   const BeneventusScreens({super.key});
@@ -17,7 +18,6 @@ class BeneventusScreens extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ROW SUBSTITUTO APP BAR
               Row(
                 children: [
                   const Icon(Icons.data_object_rounded, size: 26),
@@ -46,11 +46,8 @@ class BeneventusScreens extends ConsumerWidget {
                 ],
               ),
 
-              // SEPARACIÓN
               const SizedBox(height: 20),
-              // SEPARACIÓN
 
-              // WS
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -59,7 +56,6 @@ class BeneventusScreens extends ConsumerWidget {
                       padding: const EdgeInsets.symmetric(
                         horizontal: 10,
                         vertical: 4,
-
                       ),
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -78,7 +74,6 @@ class BeneventusScreens extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
@@ -90,11 +85,8 @@ class BeneventusScreens extends ConsumerWidget {
                 ],
               ),
 
-              // SEPARACIÓN
               const Spacer(flex: 2),
-              // SEPARACIÓN
 
-              
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -135,7 +127,6 @@ class BeneventusScreens extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  // Título
                   const Text(
                     'WebSockets en vivo',
                     style: TextStyle(
@@ -179,6 +170,28 @@ class BeneventusScreens extends ConsumerWidget {
                   ),
                 ],
               ),
+
+              const Spacer(flex: 1),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: const [
+                  _StatItem(valor: '5', etiqueta: 'PANTALLAS'),
+                  _StatItem(valor: '2', etiqueta: 'WEBSOCKETS'),
+                  _StatItem(valor: 'SM', etiqueta: 'SERGI SANCHIS'),
+                ],
+              ),
+
+              const Spacer(flex: 1),
+
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton.icon(
+                  onPressed: () => context.push('/home'),
+                  icon: const Icon(Icons.arrow_forward),
+                  label: const Text('Comenzar'),
+                ),
+              ),
             ],
           ),
         ),
@@ -189,6 +202,7 @@ class BeneventusScreens extends ConsumerWidget {
 
 class _WsImage extends StatelessWidget {
   final String path;
+  
   const _WsImage({required this.path});
 
   @override
@@ -270,3 +284,44 @@ class _FeatureCard extends StatelessWidget {
     );
   }
 }
+
+class _StatItem extends StatelessWidget {
+  final String valor;
+  final String etiqueta;
+
+  const _StatItem({required this.valor, required this.etiqueta});
+
+  @override
+
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).colorScheme.outline),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        children: [
+          Text(
+            valor,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            etiqueta,
+            style: TextStyle(
+              fontSize: 10,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              letterSpacing: 0.8,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
