@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class RiccusScreen extends StatelessWidget {
   const RiccusScreen({super.key});
@@ -53,7 +54,9 @@ class _RiccusGrid extends StatelessWidget {
      ), 
      itemBuilder: (context, index) {
        return GestureDetector(
-        onTap: () {},
+        onTap: () {
+          context.push('/petitio/${index+1}');
+        },
         child: Container(
           color: Colors.blue, 
           child: Center(child: Text('${index + 1}')),

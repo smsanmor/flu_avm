@@ -20,7 +20,9 @@ class AppTheme {
       centerTitle: false,
     ),
     textTheme: TextTheme(
-      titleLarge: GoogleFonts.montserratAlternates(),
+      titleLarge: GoogleFonts.googleSans(
+        fontWeight: FontWeight.w500,
+      ),
     )
   );
 }

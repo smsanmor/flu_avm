@@ -46,8 +46,8 @@ final appRouter = GoRouter(
         GoRoute(
           path: ':id',
           builder: (context, state) {
-            
-            return Placeholder();
+            final id = state.pathParameters['id'] ?? '';
+            return RiccuScreen(riccuId: id,);
           },
         )
       ]

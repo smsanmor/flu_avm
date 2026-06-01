@@ -7,3 +7,4 @@ export './pokemons/pokemon_screen.dart';
 export './beneventus/beneventus_screens.dart';
 export './riccus/riccus_screen.dart';
 export './calendar/calendar_screen.dart';
+export './riccus/riccu_screen.dart';
