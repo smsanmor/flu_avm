@@ -42,6 +42,15 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/petitio',
       builder: (context, state) => const RiccusScreen(),
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (context, state) {
+            
+            return Placeholder();
+          },
+        )
+      ]
     ),
     GoRoute(
       path: '/calendar',
