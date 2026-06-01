@@ -7,7 +7,7 @@ class RiccuService {
     final dio = Dio();
 
     try {
-      final responsio = await dio.get('https://rickandmortyapi.com/api/characte/$riccuId');
+      final responsio = await dio.get('https://rickandmortyapi.com/api/character/$riccuId');
 
       final riccu = RiccuMapper.rickApiRiccuToEntity(responsio.data);
 
