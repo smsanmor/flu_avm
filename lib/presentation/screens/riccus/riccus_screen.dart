@@ -75,9 +75,18 @@ class _RiccusVisumState extends ConsumerState<RiccusVisum> {
 
     oneratusEst = false;
 
+    movereScrollAdDescendit();
   }
 
-
+  void movereScrollAdDescendit() {
+    if (scrollController.position.pixels + 100 <= scrollController.position.maxScrollExtent) return;
+  
+    scrollController.animateTo(
+      scrollController.position.pixels +200,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.fastOutSlowIn
+    );
+  }
 
 }
 

@@ -7,3 +7,5 @@ export './secrets.dart';
 export './entities/usor.dart';
 
 export './entities/pokemon.dart';
+
+export './entities/riccu.dart';
