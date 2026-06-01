@@ -1,4 +1,6 @@
+import 'package:flu_avm/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class RiccusScreen extends StatelessWidget {
@@ -13,16 +15,35 @@ class RiccusScreen extends StatelessWidget {
 }
 
 
-class RiccusVisum extends StatefulWidget {
+class RiccusVisum extends ConsumerStatefulWidget {
   const RiccusVisum({super.key});
 
   @override
-  State<RiccusVisum> createState() => _RiccusVisumState();
+  ConsumerState<RiccusVisum> createState() => _RiccusVisumState();
 }
 
-class _RiccusVisumState extends State<RiccusVisum> {
+class _RiccusVisumState extends ConsumerState<RiccusVisum> {
+
+  bool oneratusEst = false;
 
   final scrollController = ScrollController();
+
+  @override
+  void initState() {
+    scrollController.addListener(() {
+      if (scrollController.position.pixels + 200 > scrollController.position.maxScrollExtent) {
+        vadeProximamPagina();
+      }
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,28 +59,52 @@ class _RiccusVisumState extends State<RiccusVisum> {
       ],
     );
   }
+
+  Future vadeProximamPagina() async {
+
+    if  (oneratusEst) return;
+
+    oneratusEst = true;
+
+    await Future.delayed(const Duration(seconds: 2));
+
+    ref.read(riccuIdsProvider.notifier).update((state) => [
+      ...state,
+      ...List.generate(30, (index) => state.length + index + 1)
+    ]);
+
+    oneratusEst = false;
+
+  }
+
+
+
 }
 
-class _RiccusGrid extends StatelessWidget {
+class _RiccusGrid extends ConsumerWidget {
 
   const _RiccusGrid();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    final riccuIds = ref.watch(riccuIdsProvider);
+
     return SliverGrid.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         crossAxisSpacing: 2,
         mainAxisSpacing: 2,
-     ), 
+     ),
+     itemCount: riccuIds.length,
      itemBuilder: (context, index) {
        return GestureDetector(
         onTap: () {
           context.push('/petitio/${index+1}');
         },
-        child: Container(
-          color: Colors.blue, 
-          child: Center(child: Text('${index + 1}')),
+        child: Image.network(
+          "https://rickandmortyapi.com/api/character/avatar/${index + 1}.jpeg",
+          fit: BoxFit.contain,
           )
         );
      },
