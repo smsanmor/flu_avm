@@ -32,6 +32,7 @@ class CalendarScreen extends StatelessWidget {
               child: Text('Meses del calendario'),
             ),
           ),
+
           // columna derecha
           SizedBox(
             width: 20,
@@ -39,8 +40,19 @@ class CalendarScreen extends StatelessWidget {
               children: _nominaBrevia
                   .map( // transformar elementos lista en un widget expanded
                     (n) => Expanded(
-                      child: Center(
-                        child: Text(n),
+                      child: RotatedBox(
+                        // estilos barra lateral
+                        quarterTurns: 1,
+                        child: Center(
+                          child: Text(
+                            n,
+                            style: TextStyle(
+                              fontSize: 7,
+                              color: Colors.grey[600],
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   )
