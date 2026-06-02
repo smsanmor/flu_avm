@@ -120,8 +120,12 @@ class _MensisCalendarii extends StatelessWidget {
             fontSize: 11,
           ),
         ),
+
         const SizedBox(height: 2),
-        const Text('Días del mes'),
+
+        const _DiesCapita(),
+
+        const SizedBox(height: 8),
       ],
     );
   }
