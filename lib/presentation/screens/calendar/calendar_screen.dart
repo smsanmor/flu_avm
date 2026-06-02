@@ -110,6 +110,34 @@ class _MensisCalendarii extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final dies = DateTime(annus, mensis + 1, 0).day;
+    // para saber cuántos días tiene el mes mira el día 0 del mes siguiente que es el último día de ese mes
+    final primus = DateTime(annus, mensis, 1).weekday % 7;
+    // DateTime(annus, mensis, 1) crea la fecha del primer día del mes
+    // accede a .weekday y lo transforma a formato inglés para que empieze en domingo
+    // para saber que día de la semana empieza el mes necesitamos saber cuántos huecos vacíos hay antes del día 1
+    // si el mes empieza en lunes primus vale 1 y por lo tanto hay 4 huecos para el primero del mes
+    final cellulae = [ // para construir las celdas del calendario
+      ...List.generate(primus, (_) => 0), // para las celdas vacías
+      // genera una lista con tantos elementos como te diga primus y que sean 0
+      // los puntos insertan valores uno a uno en lugar de meter una lista dentro de otra lista
+      ...List.generate(dies, (i) => i + 1),
+      // genera tantos elementos como días tenga el mes
+      // si dies = 31 genera 31 elementos
+      // truquillo como el de la api para que empiece por 1
+    ];
+    
+    while (cellulae.length % 7 != 0) { // las semanas tienen 7 días
+    //para partir la lista en grupos de 7 se divide entre 7 y el resto es que la semana es incompleta
+      cellulae.add(0); // si la semana es incompleta añade un 0 al final que representa la celda acía después del último día del mes
+      // es justo lo que hemos dicho antes de como se calculan las celdas vacías, la lista de ceros y las veces que se repite según la diferencia
+    }
+    
+    final hebdomades = cellulae.length ~/ 7; // cuantas semanas ocupa el mes
+    // como la lista es múltiplo de 7 se divide entre 7
+    // se usa el operador de división entera
+    // hebdomades = semana en latín?
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -120,11 +148,10 @@ class _MensisCalendarii extends StatelessWidget {
             fontSize: 11,
           ),
         ),
-
         const SizedBox(height: 2),
-
         const _DiesCapita(),
 
+        Text('Semanas: $hebdomades'),
         const SizedBox(height: 8),
       ],
     );

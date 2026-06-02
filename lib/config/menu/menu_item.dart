@@ -48,7 +48,7 @@ const appMenuItems = <MenuItem>[
   ),
   MenuItem(
     titulus: 'Calendar',
-    subtitulus: 'Diseño en Dart',
+    subtitulus: 'Ejercicio de lógica para Dart',
     link: '/calendar',
     icon: Icons.calendar_month_outlined
   )
