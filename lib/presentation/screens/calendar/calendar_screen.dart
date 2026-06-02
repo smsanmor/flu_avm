@@ -110,7 +110,6 @@ class _MensisCalendarii extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final dies = DateTime(annus, mensis + 1, 0).day;
     // para saber cuántos días tiene el mes mira el día 0 del mes siguiente que es el último día de ese mes
     final primus = DateTime(annus, mensis, 1).weekday % 7;
@@ -189,3 +188,49 @@ class _DiesCapita extends StatelessWidget {
   }
 }
 
+class _HebdomaRow extends StatelessWidget {
+  final int numerus;
+  final List<int> dies;
+
+  const _HebdomaRow({
+    required this.numerus,
+    required this.dies,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        // número de semana
+        SizedBox(
+          width: 22,
+          child: Text(
+            'wk$numerus',
+            style: TextStyle(
+              fontSize: 7,
+              color: Colors.grey[500],
+            ),
+          ),
+        ),
+        // días de esa semana
+        ...dies.map( // recorre dies y convierte cada valor en un widget
+        // asigna valores como [0, 0, 0, 0, 1, 2, 3...
+        // tres puntos para insertar
+          (d) => Expanded( // por cada elemento de dies se crea un expanded
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 1),
+                child: Text(
+                  d == 0  // si el valor es 0
+                  ? ''    // dejamos la lista vaciña
+                  : '$d', // si no es 0 muestra d
+                  style: const TextStyle(fontSize: 9),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
