@@ -13,7 +13,7 @@ class CalendarScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('$_annus'), // la variable en el AppBar
+        title: const Text('$_annus'), // la variable en el appbar
         actions: const [ // icono
           Padding(
             padding: EdgeInsets.only(right: 16),
@@ -137,20 +137,39 @@ class _MensisCalendarii extends StatelessWidget {
     // como la lista es múltiplo de 7 se divide entre 7
     // se usa el operador de división entera
     // hebdomades = semana en latín?
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          _nomina[mensis],
+          _nomina[mensis], // muestra el nombre del mes
+          // nomina es la lista de nombres
+          // mensis vale del 1 al 12
+          // mensis se usa como indice: mensis = 1 => nomina1 = JANUARY
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 11,
           ),
         ),
         const SizedBox(height: 2),
-        const _DiesCapita(),
-
-        Text('Semanas: $hebdomades'),
+        const _DiesCapita(), // cabecera días
+        // genera una fila por cada semana
+        for (int h = 0; h < hebdomades; h++)
+        // empieza en la primera semana;
+        // se repite mientras haya semanas;
+        // operador de incremento
+          _HebdomaRow(
+            numerus: h + 1, // truquillo para que h empieze en 1
+            // Cada semana contiene 7 valores.
+            dies: cellulae.sublist( // pasa a _HebdomaRow la parte de la lista de las celdas que correpsonde a esa semana
+             // cellulae contiene todas las celdas, días y huecos
+             // ejemplo: [0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+             // sublist por que solo necesitamos 7 valores cada vez
+              h * 7, // en qué posición empieza la semana
+              // h = 2 => empieza en 14
+              (h + 1) * 7, // truquillo para que pille el último
+            ),
+          ),
         const SizedBox(height: 8),
       ],
     );
@@ -234,3 +253,5 @@ class _HebdomaRow extends StatelessWidget {
     );
   }
 }
+
+
