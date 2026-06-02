@@ -27,9 +27,10 @@ class CalendarScreen extends StatelessWidget {
         children: [
           Expanded(
             child: ListView(
-              children: List.generate(6, (i) {
-                final m1 = i * 2 + 1; // meses por fila
-                final m2 = i * 2 + 2;
+              children: List.generate(6, (i) { // lista de 6 filas cada una con 2 meses
+                final m1 = i * 2 + 1; // primer mes de cada fila
+                final m2 = i * 2 + 2; // segundo mes de cada fila
+                // no es el código más eficiente del mundo pero es mi idea de como hacerlo
                 return Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 6,
@@ -61,15 +62,15 @@ class CalendarScreen extends StatelessWidget {
           SizedBox( // columna derecha
             width: 20,
             child: Column(
-              children: _nominaBrevia
-                  .map( // transformar elementos lista en un widget expanded
-                    (n) => Expanded(
+              children: _nominaBrevia // los hijos se crean a partir de la lista nomina brevia
+                  .map( // recorre la lista y transformar elementos lista en un widget expanded
+                    (n) => Expanded( // por cada elemento de la lista, crea un expanded.
                       child: RotatedBox(
                         // estilos barra lateral
                         quarterTurns: 1,
                         child: Center(
                           child: Text(
-                            n,
+                            n, // n representa el texto del mes actual
                             style: TextStyle(
                               fontSize: 7,
                               color: Colors.grey[600],
@@ -125,3 +126,35 @@ class _MensisCalendarii extends StatelessWidget {
     );
   }
 }
+
+class _DiesCapita extends StatelessWidget {
+  const _DiesCapita();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.grey[800],
+      padding: const EdgeInsets.symmetric(vertical: 2),
+      child: Row(
+        children: [
+          const SizedBox(width: 22), // espacio para semanas wk 1, wk 2...
+          ...['S', 'M', 'T', 'W', 'T', 'F', 'S'].map( //lista + map para recorrer y conver en widget + ...) insertar widgets dentro de children
+            (d) => Expanded( //por cada letra de la lista crea un expanded para que que ocupe lo mismo
+              child: Center(
+                child: Text(
+                  d, // variable temporal que representa cada elemento de la lista meintras se recorre
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 9,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
