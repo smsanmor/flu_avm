@@ -5,7 +5,6 @@ class CalendarScreen extends StatelessWidget {
 
   static const int _annus = 2026; // guadro el valor del título en una variable
 
-
   static const List<String> _nominaBrevia = [ //lista para la barra lateral
     'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN','JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC',
   ];
@@ -15,8 +14,7 @@ class CalendarScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('$_annus'), // la variable en el AppBar
-        // icono
-        actions: const [
+        actions: const [ // icono
           Padding(
             padding: EdgeInsets.only(right: 16),
             child: Icon(Icons.calendar_month_outlined),
@@ -33,8 +31,7 @@ class CalendarScreen extends StatelessWidget {
             ),
           ),
 
-          // columna derecha
-          SizedBox(
+          SizedBox( // columna derecha
             width: 20,
             child: Column(
               children: _nominaBrevia
@@ -61,6 +58,43 @@ class CalendarScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+
+
+class _MensisCalendarii extends StatelessWidget {
+  final int annus; // años declarado
+  final int mensis; // meses declarado
+
+  static const List<String> _nomina = [
+    '', // para que enero sea 1
+    'JANUARY','FEBRUARY','MARCH','APRIL',
+    'MAY','JUNE','JULY','AUGUST',
+    'SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER',
+  ];
+
+  const _MensisCalendarii({
+    required this.annus,
+    required this.mensis,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          _nomina[mensis],
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 11,
+          ),
+        ),
+        const SizedBox(height: 2),
+        const Text('Días del mes'),
+      ],
     );
   }
 }
