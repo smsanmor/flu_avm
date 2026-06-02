@@ -5,6 +5,11 @@ class CalendarScreen extends StatelessWidget {
 
   static const int _annus = 2026; // guadro el valor del título en una variable
 
+
+  static const List<String> _nominaBrevia = [ //lista para la barra lateral
+    'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN','JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,8 +24,30 @@ class CalendarScreen extends StatelessWidget {
         ],
       ),
 
-      body: const Center(
-        child: Text('Calendario'),
+        body: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Expanded(
+            child: Center(
+              child: Text('Meses del calendario'),
+            ),
+          ),
+          // columna derecha
+          SizedBox(
+            width: 20,
+            child: Column(
+              children: _nominaBrevia
+                  .map( // transformar elementos lista en un widget expanded
+                    (n) => Expanded(
+                      child: Center(
+                        child: Text(n),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+        ],
       ),
     );
   }
