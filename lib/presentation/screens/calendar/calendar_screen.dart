@@ -25,9 +25,36 @@ class CalendarScreen extends StatelessWidget {
         body: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Expanded(
-            child: Center(
-              child: Text('Meses del calendario'),
+          Expanded(
+            child: ListView(
+              children: List.generate(6, (i) {
+                final m1 = i * 2 + 1; // meses por fila
+                final m2 = i * 2 + 2;
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 6,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: _MensisCalendarii(
+                          annus: _annus,
+                          mensis: m1,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: _MensisCalendarii(
+                          annus: _annus,
+                          mensis: m2,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
             ),
           ),
 
